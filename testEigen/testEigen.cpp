@@ -3,7 +3,7 @@
 
 int main()
 {
-	Eigen::Matrix<double, 10, 10> A;
+	/*
 	A.setZero();
 	//A(9, 0) = 1.234;
 	for (size_t i = 0; i < 10; ++i)
@@ -33,6 +33,15 @@ int main()
 	C = A * B;
 	std::cout << "\n Hasil Kali Matrix a * b \t: " << C << std:: endl;;
 
+	*/
+	Eigen::Matrix<int, 2, 3> MatrixA;
+	Eigen::Matrix<int, 3, 4> MatrixB;
+	//begin 
+	Eigen::MatrixXd  m = Eigen::MatrixXd::Random(3, 3); // matrixxd= matrix with type double and it reperesent arbitary size
 
+
+
+
+	
 	return 0;
 }
