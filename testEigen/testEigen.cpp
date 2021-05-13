@@ -1,8 +1,11 @@
 #include <Eigen/Dense>
 #include  <iostream>
+#include <fstream>
 
 int main()
 {
+
+	std::ofstream make("solveLinear.txt", std::ios::app);
 	 /*
 	A.setZero();
 	//A(9, 0) = 1.234;
@@ -77,18 +80,18 @@ int main()
 	std::cout << compileTime;
 	std::cout << std::endl;
 
-	Eigen::Matrix<int, 2, 3> matrixAddL;
-	Eigen::Matrix<int, 3, 4> matrixAddR;
-	matrixAddL(0, 0) = 1;
-	matrixAddL(0, 1) = 2;
-	matrixAddL(0, 2) = 4;
-	matrixAddL(1, 0) = 2;
-	matrixAddL(1, 1) = 6;
-	matrixAddL(1, 2) = 0;
+	Eigen::Matrix<double, 2, 3> matrixAddL;
+	Eigen::Matrix<double, 3, 4> matrixAddR;
+	matrixAddL(0, 0) = 1.0;
+	matrixAddL(0, 1) = 2.0;
+	matrixAddL(0, 2) = 4.0;
+	matrixAddL(1, 0) = 2.0;
+	matrixAddL(1, 1) = 6.0;
+	matrixAddL(1, 2) = 0.0;
 
-	matrixAddR(0, 0) = 4, matrixAddR(0, 1) = 1, matrixAddR(0, 2) = 4, matrixAddR(0, 3) = 3;
-	matrixAddR(1, 0) = 0, matrixAddR(1, 1) = -1, matrixAddR(1, 2) = 3, matrixAddR(1, 3) = 1;
-	matrixAddR(2, 0) = 2, matrixAddR(2, 1) = 7, matrixAddR(2, 2) = 5, matrixAddR(2, 3) = 2;
+	matrixAddR(0, 0) = 4.0, matrixAddR(0, 1) = 1.0, matrixAddR(0, 2) = 4.0, matrixAddR(0, 3) = 3.0;
+	matrixAddR(1, 0) = 0.0, matrixAddR(1, 1) = -1.0, matrixAddR(1, 2) = 3.0, matrixAddR(1, 3) = 1.0;
+	matrixAddR(2, 0) = 2.0, matrixAddR(2, 1) = 7.0, matrixAddR(2, 2) = 5.0, matrixAddR(2, 3) = 2.0;
 
 	std::cout << " show first matrix \t: [" << std::endl;
 	std::cout << matrixAddL << std::endl;
@@ -98,19 +101,47 @@ int main()
 	std::cout << matrixAddR << std::endl;
 	std::cout << "]" << std::endl;
 
-	Eigen::Matrix<int, 2, 4> multiplyMat;
+	Eigen::Matrix<double, 2, 4> multiplyMat;
 	multiplyMat = matrixAddL * matrixAddR;
 	std::cout << " show after multiply  matrix \t: [" << std::endl;
 	std::cout << multiplyMat << std::endl;
 	std::cout << "]" << std::endl;
 	std::cout<<" And it's transpose \t: ["<<std::endl<<multiplyMat.transpose()<<std::endl;
-
-
-
-
-
-
+	make << "matrix a \t:" << std::endl;
+	make << matrixAddL<<std::endl;
+	make << "matrix b \t:" << std::endl;
+	make << matrixAddR << std::endl;
+	make << "hasil" << std::endl;
+	make << multiplyMat << std::endl;
+	make << "then transpose \t: \n" << multiplyMat.transpose() << std::endl;
+	Eigen::Matrix<double, 3, 3> invers;
+	invers(0, 0) = 1; invers(0, 1) = 2; invers(0, 2) = 3;
+	invers(1, 0) = 2; invers(1, 1) = 5; invers(1, 2) = 3;
+	invers(2, 0) = 1; invers(2, 1) = 0; invers(2, 2) = 8;
+	make << "\nMatriks Awal \t: \n" << invers << std::endl << "\nMatriks Invers \t: \n" << invers.inverse() << std::endl;
 
 	
+
+	make.close();
+
+	make.open("solveEquation.txt", std::ios::app);
+	make << "\nx\t+2y\t+3z\t=5\n";
+	make << "2x\t+5y\t+3z\t=3\n";
+	make << "x\t+0y\t+8z\t=17\n";
+
+	//solve
+	Eigen::Matrix<double, 3, 3> aMatriks;
+	aMatriks(0, 0) = 1, aMatriks(0,1) = 2, aMatriks(0, 2) = 3;
+	aMatriks(1, 0) = 2, aMatriks(1, 1) = 5, aMatriks(1, 2) = 3;
+	aMatriks(2, 0) = 1, aMatriks(2, 1) = 0, aMatriks(2, 2) = 8;
+	Eigen::Matrix<double,3,1> bMatriks;
+	bMatriks(0, 0) = 5, bMatriks(1, 0) = 3, bMatriks(2, 0) = 17;
+	make << "Hasil \t:\n";
+	make << aMatriks.inverse() * bMatriks;
+
+
+
+	make.close();
 	return 0;
 }
+
