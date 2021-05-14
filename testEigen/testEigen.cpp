@@ -1,7 +1,9 @@
 #include <Eigen/Dense>
 #include  <iostream>
 #include <fstream>
+#include <cmath>
 
+typedef Eigen::Matrix<float, 100, 100> typedefForS;
 int main()
 {
 
@@ -151,11 +153,11 @@ int main()
 	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> dynamicSize;
 	Eigen::MatrixXi m(10, 10);//generate arbitary mattrix
 	m(0, 1) = 1;//set matrix value
-	std::cout << "Using Typedef \t: \n" << m << std::endl;
+	//std::cout << "Using Typedef \t: \n" << m << std::endl;
 	Eigen::VectorXd vec(10);//generate 10x1 matrix
 	vec[0] = 12;
 	vec[1] = 13;
-	std::cout << "Test Vector \t: \n" << vec << std::endl;
+	//std::cout << "Test Vector \t: \n" << vec << std::endl;
 	Eigen::Matrix3f ThreeTime;
 	ThreeTime << 1, 2, 3, 1, 2, 3, 1, 2, 3;
 	std::cout << " Initialization Matrix 2 dimension \t: \n" << ThreeTime << std::endl;
@@ -166,6 +168,60 @@ int main()
 	findIn << 1, 2, 3,2,5,3,1,0,8;
 	std::cout << "Show Matrix Element \t: [\n"<<findIn<<std::endl ;
 	std::cout << "And  it's invers \t: [\n" << findIn.inverse() << std::endl;
+	std::cout << " Find Determinant \t:[" << std::endl;
+	Eigen::Matrix<double, 4, 4> findDet;
+	findDet << 3, 5, -2, 6, 1, 2, -1, 1, 2, 4, 1, 5, 3, 7, 5, 3;
+	std::cout << "Show Matrix \t:[" << std::endl << findDet << std::endl;
+	std::cout << "Show Determinant \t:[\n" << findDet.determinant() << std::endl;
+	std::cout << "Show norm matrix\t: " << findDet.norm() << std::endl;
+	Eigen::Matrix<float, 3, 1> columnVe;
+	columnVe << -3,2,1;
+	std::cout << "Original Vector \t:[\n" << columnVe << std::endl;
+	std::cout << "Find Norm Vector \t:[\n" << columnVe.norm()<<std::endl;
+	std::cout << "Square  root 14 is  equal to norm vector \t:  [" << sqrt(14)<<"]" << std::endl;
+	std::cout << "Dynamic matrix size  \t:[\n";
+	Eigen::Matrix<float, 4, 1 > dynamicSi;
+	dynamicSi << 2, -1, 3, -5;//column vector
+	std::cout << "Test dynamic size , column vector \t: " << dynamicSi << std::endl <<
+		"and it's  norm \t[\n" << dynamicSi.norm() << "]\n";
+	std::cout << "test diagonal \t:[\n" << dynamicSi.diagonal() << "]" << std::endl;
+	std::cout << "Matrix Persegi \t:[\n";
+	Eigen::Matrix<float, 3, 3> diag;
+	diag << 1, 2, 3, 4, 5, 6, 7, 8, 9;
+	std::cout << diag.diagonal() << "]" << std::endl;
+	std::cout << "Test fixed size column or row " << std::endl;
+	Eigen::Vector2d aFix(1, 2);//row vector 
+	std::cout << "Test fixed size \t:[\n" << aFix << "]" << std::endl;
+	//Eigen::Matrix<int, 5, 1> fixedSizeF{ 1,2,3,4,5 };//for c++-0x . if c++-11 is enabled;
+	/*Eigen::MatrixX2d aDoub{
+		{1,2},
+		{3,4}
+	};*/ //for c++11
+
+	std::cout << "Assign Matrix \t:[\n";
+	Eigen::Matrix2d doubleTwo(2, 2);
+	doubleTwo(0, 0) = 3, doubleTwo(0, 1) = 0, doubleTwo(1, 0) = 8, doubleTwo(1,1) = -1;
+	std::cout << "2 x 2 matrix assign \t:[\n"<<doubleTwo<<"]"<<std::endl;
+	std::cout << "Find Eigen value \t: [\n" << doubleTwo.eigenvalues() << "]" << std::endl;
+	std::cout << "Eigen value for 3x3 matrices \t:[" << std::endl;
+	Eigen::Matrix<double, 3, 3>eigenVal;
+	eigenVal << 0, 1, 0, 0, 0, 1, 4, -17, 8;
+	std::cout << "Matrix element\t:[\n";
+	std::cout << eigenVal << std::endl;
+	std::cout << "Ant it's eigen value \t:[\n " << eigenVal.eigenvalues()<<"]" << std::endl;
+	
+	std::cout << "Resize Matrix \t:[\n";
+	Eigen::MatrixXd matrixRes(3,2);
+	std::cout << "Before Resizing Matrix, \n[Size Rows \t: " << matrixRes.rows() << "]" << "\n[Size Cols\t:" << matrixRes.cols() << "]" << std::endl;
+	matrixRes.resize(4, 1);
+	std::cout << "After Resizing Matrix, \n[Size Rows \t: " << matrixRes.rows() << "]" << "\n[Size Cols\t:" << matrixRes.cols() << "]" << std::endl;
+	std::cout << "\nResize vector" << std::endl;
+	Eigen::VectorXd vecRe(3, 1);
+	std::cout << "Before Resizing vector, \n[Size Rows \t: " << vecRe.rows() << "]" << "\n[Size Cols\t:" << vecRe.cols() << "]" << std::endl;
+	vecRe.resize(9, 1);
+	std::cout << "After Resizing vector, \n[Size Rows \t: " << vecRe.rows() << "]" << "\n[Size Cols\t:" << vecRe.cols() << "]" << std::endl;
+	
+
 
 
 
