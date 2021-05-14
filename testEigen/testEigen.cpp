@@ -37,6 +37,8 @@ int main()
 	std::cout << "\n Hasil Kali Matrix a * b \t: " << C << std:: endl;;
 
 	*/ 
+
+	/*
 	Eigen::Matrix<int, 2, 3> MatrixA;
 	Eigen::Matrix<int, 3, 4> MatrixB;
 	//begin 
@@ -49,11 +51,11 @@ int main()
 	std::cout << "show matrix \t: [" << std::endl;
 	std::cout << m;
 	std::cout << "]" << std::endl;
-
+	*/
 	//vector
 	Eigen::VectorXd v(3); //vector 1 dimension 
 	//Eigen::VectorXd v1(1, 2); //2 dimension vector 
-
+	/*
 	v << 1, 2, 3;
 	std::cout << " vector v value \t: " << std::endl << v << std::endl;
 	std::cout << " Multiply matrix a * vector v \t: [" << std::endl;
@@ -142,6 +144,34 @@ int main()
 
 
 	make.close();
+	*/
+	
+	std::cout << "Generate matrix 2  dimension\t:" << std::endl;
+	Eigen::Matrix<double, 2, 2>  name2dimen;
+	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> dynamicSize;
+	Eigen::MatrixXi m(10, 10);//generate arbitary mattrix
+	m(0, 1) = 1;//set matrix value
+	std::cout << "Using Typedef \t: \n" << m << std::endl;
+	Eigen::VectorXd vec(10);//generate 10x1 matrix
+	vec[0] = 12;
+	vec[1] = 13;
+	std::cout << "Test Vector \t: \n" << vec << std::endl;
+	Eigen::Matrix3f ThreeTime;
+	ThreeTime << 1, 2, 3, 1, 2, 3, 1, 2, 3;
+	std::cout << " Initialization Matrix 2 dimension \t: \n" << ThreeTime << std::endl;
+	Eigen::MatrixXd ten(3, 3);
+	ten << 2, 3, 1, 11, 21, 32, 13, 41, 13;
+	std::cout << "Show Matrix \t: \n" << ten << std::endl;
+	Eigen::Matrix<double, 3, 3> findIn;
+	findIn << 1, 2, 3,2,5,3,1,0,8;
+	std::cout << "Show Matrix Element \t: [\n"<<findIn<<std::endl ;
+	std::cout << "And  it's invers \t: [\n" << findIn.inverse() << std::endl;
+
+
+
+
+	make.close();
+
 	return 0;
 }
 
